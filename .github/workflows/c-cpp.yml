@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: push lib
-      run: make push
+      with:
+        submodules: true
     - name: build
-      run: make all
+      run: make
