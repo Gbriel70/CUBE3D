@@ -3,6 +3,7 @@
 NAME = CUBE3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+MLX_FLAGS = -ldl -lglfw -pthread -lm
 
 #=================================FILES====================================#
 
@@ -10,7 +11,11 @@ SRC_PATH = srcs
 SRCS = $(wildcard $(SRC_PATH)/*.c)
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I includes
+
 LIBFT = libs/libft/libft.a
+
+MLX_PATH = libs/MLX42
+MLX = $(MLX_PATH)/build/libmlx42.a
 
 #=================================COLORS====================================#
 
@@ -35,7 +40,7 @@ push:
 
 #=================================RULES====================================#
 
-all: libft $(NAME)
+all: libft mlx $(NAME)
 
 libft:
 	@echo "$(YELLOW)Compiling libft...$(RESET)"
@@ -47,15 +52,23 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
 
+mlx:
+	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
+	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
+	@make $(MLX_PATH)/build -j4 > /dev/null 2>&1
+	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
+
 clean:
 	@echo "$(RED)Cleaning up...$(RESET)"
 	@$(MAKE) clean -C libs/libft
 	@rm -f $(OBJS)
+	@rm -f $(MLX_PATH)/build/*.o
 	@echo "$(RED)Cleanup complete!$(RESET)"
 
 fclean: clean
 	@echo "$(MAGENTA)Cleaning up...$(RESET)"
 	@$(MAKE) fclean -C libs/libft
+	@rm -f $(MLX_PATH)/build/*.a
 	@rm -f $(NAME)
 	@echo "$(MAGENTA)Cleanup complete!$(RESET)"
 
