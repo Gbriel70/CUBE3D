@@ -26,6 +26,13 @@ leak: all
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 	@echo "$(GREEN)Valgrind complete!$(RESET)"
 
+#=================================PUSH LIB====================================#
+
+push:
+	@echo "$(YELLOW)Pushing to libft...$(RESET)"
+	@git submodule update --init --recursive
+	@echo "$(YELLOW)Push to libft complete!$(RESET)"
+
 #=================================RULES====================================#
 
 all: libft $(NAME)
