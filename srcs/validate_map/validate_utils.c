@@ -1,4 +1,24 @@
-#include "cube.h"
+#include "../../includes/cube.h"
+
+void ft_free_array(char **array)
+{
+	int i;
+
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+}
+
+int ft_mtxlen(char **mtx)
+{
+	int i;
+
+	i = -1;
+	while (mtx[++i])
+		;
+	return (i);
+}
 
 int is_empty_line(char *line)
 {

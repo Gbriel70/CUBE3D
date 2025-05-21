@@ -1,6 +1,6 @@
-#include "cube.h"
+#include "../../includes/cube.h"
 
-int	hash_element_exit(char *line, int *array)
+static int	hash_element_exit(char *line, int *array)
 {
 	if (is_empty_line(line) && array[6] != 0)
 		return (9);
@@ -10,7 +10,7 @@ int	hash_element_exit(char *line, int *array)
 		return (11);
 }
 
-int	hash_element(char *line)
+static int	hash_element(char *line)
 {
 	if (!ft_strncmp(line, "NO", 2))
 		return (0);
@@ -32,7 +32,7 @@ int	hash_element(char *line)
 		return (8);
 }
 
-void	count_file_element_exit(char *line, int *array)
+static void	count_file_element_exit(char *line, int *array)
 {
 	char	*new_line;
 
@@ -43,7 +43,7 @@ void	count_file_element_exit(char *line, int *array)
 	free(new_line);
 }
 
-int	*count_file_elements(char *file)
+static int	*count_file_elements(char *file)
 {
 	int		fd;
 	int		*array;

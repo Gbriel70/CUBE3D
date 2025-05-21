@@ -10,12 +10,18 @@ MLX_FLAGS = -ldl -lglfw -pthread -lm
 SRC_PATH = srcs
 SRCS = $(wildcard $(SRC_PATH)/*.c)
 OBJS = $(SRCS:.c=.o)
-INCLUDES = -I includes
+
+VALIDATE_SRC_PATH = srcs/validate_map
+VALIDATE_SRC = $(wildcard $(VALIDATE_SRC_PATH)/*.c)
+VALIDATE_OBJS = $(VALIDATE_SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
 
 MLX_PATH = libs/MLX42
+MLX_INCLUDES = -I $(MLX_PATH)/include
 MLX = $(MLX_PATH)/build/libmlx42.a
+
+INCLUDES = -I includes $(MLX_INCLUDES)
 
 #=================================COLORS====================================#
 
@@ -47,10 +53,13 @@ libft:
 	@$(MAKE) -C libs/libft
 	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(VALIDATE_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(VALIDATE_OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 mlx:
 	@echo "$(YELLOW)Compiling MLX42...$(RESET)"

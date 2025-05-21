@@ -1,6 +1,6 @@
-#include "cube.h"
+#include "../../includes/cube.h"
 
-static short valid_map_name(char *filename)
+short valid_map_name(char *filename)
 {
 	int len;
 	int exit_len;
@@ -27,5 +27,7 @@ void validate_map(int ac, char **av)
 	if (valid_map_count(av[1]) == FALSE)
 		exit(1);
 	if (validate_map_content(av[1]) == FALSE)
+		exit(1);
+	if (validate_map_game(av[1]) == FALSE)
 		exit(1);
 }
