@@ -9,18 +9,17 @@ TESTS_PATH = .
 TESTS = $(wildcard $(TESTS_PATH)/*.c)
 OBJS = $(TESTS:.c=.o)
 
-MAIN_PATH = ..
-MLX_PATH = $(MAIN_PATH)/libs/MLX42
-
-MLX_PATH = libs/MLX42
-MLX_INCLUDES = -I $(MLX_PATH)/include
+MLX_PATH = ../libs/MLX42
+MLX_INCLUDES = $(MLX_PATH)/include/MLX42
 MLX = $(MLX_PATH)/build/libmlx42.a
+
+LIBFT = ../libs/libft/libft.a
 
 VALIDATE_SRC_PATH = ../srcs/validate_map
 VALIDATE_SRC = $(wildcard $(VALIDATE_SRC_PATH)/*.c)
 VALIDATE_OBJS = $(VALIDATE_SRC:.c=.o)
 
-INCLUDES = -I $(MAIN_PATH)/includes -I $(MLX_PATH)/include
+INCLUDES = -I includes -I $(MLX_INCLUDES)
 
 #==================================COLORS========================================#
 
@@ -31,15 +30,15 @@ RESET = \033[0m
 
 #==================================RULES========================================#
 
-all: libft $(NAME)
+all: libft mlx $(NAME)
 
 $(NAME): $(OBJS) $(VALIDATE_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(C) $(CC_FLAGS) -o $(NAME) $(OBJS) $(VALIDATE_OBJS)  $(INCLUDES)
+	@$(C) $(OBJS) $(VALIDATE_OBJS) $(CC_FLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
 
 %.o: %.c
-	@$(C) $(CC_FLAGS) -c $< -o $@
+	@$(C) $(CC_FLAGS) $(INCLUDES) -c $< -o $@
 
 libft:
 	@echo "$(YELLOW)Compiling libft...$(RESET)"
@@ -49,17 +48,21 @@ libft:
 mlx:
 	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
 	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
-	@make $(MLX_PATH)/build -j4 > /dev/null 2>&1
+	@make -C $(MLX_PATH)/build -j4 > /dev/null 2>&1
 	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
 
 clean:
 	@echo "$(RED)Cleaning $(NAME) objects...$(RESET)"
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(VALIDATE_OBJS)
+	@$(MAKE) clean -C ../libs/libft
+	@$(MAKE) clean -C $(MLX_PATH)/build
 	@echo "$(RED)Cleaning of $(NAME) objects complete!$(RESET)"
 
 fclean: clean
 	@echo "$(RED)Cleaning $(NAME) binary...$(RESET)"
 	@rm -f $(NAME)
+	@$(MAKE) fclean -C ../libs/libft
+	@rm -rf $(MLX_PATH)/build
 	@echo "$(RED)Cleaning of $(NAME) binary complete!$(RESET)"
 
 re: fclean all

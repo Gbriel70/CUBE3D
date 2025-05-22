@@ -10,7 +10,7 @@ static int	hash_element_exit(char *line, int *array)
 		return (11);
 }
 
-static int	hash_element(char *line)
+int	hash_element(char *line)
 {
 	if (!ft_strncmp(line, "NO", 2))
 		return (0);
@@ -51,7 +51,7 @@ static int	*count_file_elements(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("%dError\nopen file: %s\n%d", RED, file, RESET), 1);
+		return (FALSE);
 	array = ft_calloc(1, sizeof(int));
 	if (!array)
 	{

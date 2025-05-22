@@ -30,7 +30,7 @@ static int validate_color(char *line)
 		while (mtx_color[i])
 		{
 			if (!ft_isdigit(mtx_color[i][0]) || 
-			!(ft_atoi(mtx_color[i]) >= 0 && !ft_atoi(mtx_color[i]) <= 255))
+			(ft_atoi(mtx_color[i]) < 0 || ft_atoi(mtx_color[i]) > 255))
 			{
 				ft_free_array(mtx_color);
 				return (FALSE);
@@ -82,26 +82,26 @@ static void validate_map_content_exit(char **file, int *array)
 
 int validate_map_content(char *file)
 {
-	char **file;
+	char **tmp_file;
 	int *array;
 
-	file = load_file(file);
-	if (!file)
+	tmp_file = load_file(file);
+	if (!tmp_file)
 		return (FALSE);
 	array = ft_calloc(20, sizeof(int));
 	if (!array)
 	{
-		ft_free(file);
+		ft_free_array(tmp_file);
 		return (FALSE);
 	}
-	validate_map_content_exit(file, array);
+	validate_map_content_exit(tmp_file, array);
 	if (array[0] == 4 && array[1] == 2 && array[2] == 0)
 	{
 		free(array);
-		ft_free_array(file);
+		ft_free_array(tmp_file);
 		return (TRUE);
 	}
 	free(array);
-	ft_free_array(file);
+	ft_free_array(tmp_file);
 	return (FALSE);
 }

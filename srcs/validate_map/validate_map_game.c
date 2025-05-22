@@ -26,13 +26,13 @@ void flood_fill(char **file, int x, int y, int *open_map)
 		flood_fill(file, x, y - 1, open_map);
 }
 
-int validate_map_game(char *file)
+int validate_map_game(char *filename)
 {
 	char **file;
 	int *player;
 	int open_map;
 
-	file = load_file(file);
+	file = load_file(filename);
 	player = load_player(file);
 	open_map = 0;
 	if (player[0] != 1)

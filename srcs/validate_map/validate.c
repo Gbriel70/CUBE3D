@@ -9,7 +9,7 @@ short valid_map_name(char *filename)
 	exit_len = ft_strlen(".cub");
 	if (len <= exit_len || ft_strncmp(&filename[len - 4], ".cub", exit_len) != 0)
 	{
-		ft_printf("%dError\nInvalid map name. Map name must end with .cub\n%d", RED, RESET);
+		ft_printf("%sError\nInvalid map name. Map name must end with .cub\n%s", RED, RESET);
 		return (FALSE);
 	}
 	return (TRUE);

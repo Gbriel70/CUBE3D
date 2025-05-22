@@ -32,6 +32,9 @@ int valid_map_count(char *filename);
 int validate_map_content(char *file);
 short valid_map_name(char *filename);
 int validate_map_game(char *file);
+char **load_file(char *filename);
+int *load_player(char **file);
+int	hash_element(char *line);
 
 //MAP VALIDATION UTILS
 void replace_char(char *str, char old, char new);

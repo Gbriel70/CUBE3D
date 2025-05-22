@@ -11,17 +11,17 @@ SRC_PATH = srcs
 SRCS = $(wildcard $(SRC_PATH)/*.c)
 OBJS = $(SRCS:.c=.o)
 
-VALIDATE_SRC_PATH = srcs/validate_map
+VALIDATE_SRC_PATH = $(SRC_PATH)/validate_map
 VALIDATE_SRC = $(wildcard $(VALIDATE_SRC_PATH)/*.c)
 VALIDATE_OBJS = $(VALIDATE_SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
 
 MLX_PATH = libs/MLX42
-MLX_INCLUDES = -I $(MLX_PATH)/include
+MLX_INCLUDES = $(MLX_PATH)/include/MLX42
 MLX = $(MLX_PATH)/build/libmlx42.a
 
-INCLUDES = -I includes $(MLX_INCLUDES)
+INCLUDES = -I includes -I $(MLX_INCLUDES)
 
 #=================================COLORS====================================#
 
@@ -55,7 +55,7 @@ libft:
 
 $(NAME): $(OBJS) $(VALIDATE_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(VALIDATE_OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS)
+	@$(CC) $(OBJS) $(VALIDATE_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
 
 %.o: %.c
@@ -64,13 +64,13 @@ $(NAME): $(OBJS) $(VALIDATE_OBJS)
 mlx:
 	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
 	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
-	@make $(MLX_PATH)/build -j4 > /dev/null 2>&1
+	@make -C $(MLX_PATH)/build -j4 > /dev/null 2>&1
 	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
 
 clean:
 	@echo "$(RED)Cleaning up...$(RESET)"
 	@$(MAKE) clean -C libs/libft
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(VALIDATE_OBJS)
 	@rm -f $(MLX_PATH)/build/*.o
 	@echo "$(RED)Cleanup complete!$(RESET)"
 
