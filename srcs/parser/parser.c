@@ -1,6 +1,6 @@
 #include "../../includes/cube.h"
 
-void	extract_content(t_data *game, char **file)
+static void	extract_content(t_data *game, char **file)
 {
 	int		i;
 	size_t	rows;

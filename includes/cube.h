@@ -6,7 +6,7 @@
 /*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:58:18 by gabastos          #+#    #+#             */
-/*   Updated: 2025/05/20 11:24:42 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:21:29 by gabastos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,15 @@ typedef struct s_data
 	float			plane_ratio;
 	float			frame_time;
 }	t_data;
+
+// Parser
+
+void	parse_map(t_data *game);
+int		extract_color(char *color);
+int		extract_floor_ceiling_color(t_data *game);
+void	extract_map(t_data *game);
+void	extract_weapon_texture(t_data *game);
+void	extract_wall_texture(t_data *game);
+void	player_initial_setup(t_data *game, int *player);
 
 #endif
