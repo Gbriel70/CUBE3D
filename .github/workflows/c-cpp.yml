@@ -24,3 +24,8 @@ jobs:
         cd validate_tests
         make all
         ./validate_tests
+    - name: Finish
+      if: always()
+      run: |
+        echo "Validation tests completed."
+        
