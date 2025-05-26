@@ -10,12 +10,27 @@ MLX_FLAGS = -ldl -lglfw -pthread -lm
 SRC_PATH = srcs
 SRCS = $(wildcard $(SRC_PATH)/*.c)
 OBJS = $(SRCS:.c=.o)
-INCLUDES = -I includes
+
+PARSER_SRC_PATH = $(SRC_PATH)/parser
+PARSER_SRC = $(wildcard $(PARSER_SRC_PATH)/*.c)
+PARSER_OBJS = $(PARSER_SRC:.c=.o)
+
+# Adicionando referências para close_game e load_file
+CLOSE_GAME_SRC_PATH = $(SRC_PATH)/close_game
+CLOSE_GAME_SRC = $(wildcard $(CLOSE_GAME_SRC_PATH)/*.c)
+CLOSE_GAME_OBJS = $(CLOSE_GAME_SRC:.c=.o)
+
+VALIDATE_SRC_PATH = $(SRC_PATH)/validate_map
+VALIDATE_SRC = $(wildcard $(VALIDATE_SRC_PATH)/*.c)
+VALIDATE_OBJS = $(VALIDATE_SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
 
 MLX_PATH = libs/MLX42
+MLX_INCLUDES = $(MLX_PATH)/include/MLX42
 MLX = $(MLX_PATH)/build/libmlx42.a
+
+INCLUDES = -I includes -I $(MLX_INCLUDES)
 
 #=================================COLORS====================================#
 
@@ -23,6 +38,7 @@ RED = \033[0;31m
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
 MAGENTA = \033[0;35m
+RESET = \033[0m
 
 #=================================VALGRIND====================================#
 
@@ -47,21 +63,25 @@ libft:
 	@$(MAKE) -C libs/libft
 	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
 
-$(NAME): $(OBJS)
+# Atualizando para incluir os novos objetos
+$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
+	@$(CC) $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 mlx:
 	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
 	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
-	@make $(MLX_PATH)/build -j4 > /dev/null 2>&1
+	@make -C $(MLX_PATH)/build -j4 > /dev/null 2>&1
 	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
 
 clean:
 	@echo "$(RED)Cleaning up...$(RESET)"
 	@$(MAKE) clean -C libs/libft
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS)
 	@rm -f $(MLX_PATH)/build/*.o
 	@echo "$(RED)Cleanup complete!$(RESET)"
 

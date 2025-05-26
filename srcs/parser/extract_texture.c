@@ -12,7 +12,7 @@ void	extract_weapon_texture(t_data *game)
 	while (i < WEAPON_FRAMES)
 	{
 		if (!game->wand_tex[i])
-			handle_error(game, "Error loading weapon texture", game, 1);
+			handle_error("Error loading weapon texture", game, 1);
 		i++;
 	}
 }

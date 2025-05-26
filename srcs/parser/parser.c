@@ -29,6 +29,6 @@ void	parse_map(t_data *game)
 	extract_floor_ceiling_color(game);
 	extract_wall_texture(game);
 	extract_weapon_texture(game);
-	ft_mlx_free(file);
+	ft_free_matrix(file);
 	free(player);
 }

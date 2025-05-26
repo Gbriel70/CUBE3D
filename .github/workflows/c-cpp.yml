@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "validate_map" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "validate_map" ]
 
 jobs:
   build:
@@ -15,5 +15,12 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - name: build
-      run: make all
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y xorg-dev libglfw3-dev
+    - name: Run validation tests
+      run: |
+        cd validate_tests
+        make all
+        ./validate_tests

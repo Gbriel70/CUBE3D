@@ -6,19 +6,28 @@
 /*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:58:18 by gabastos          #+#    #+#             */
-/*   Updated: 2025/05/21 10:21:29 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:20:21 by gabastos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
 
+//LIBFT
 # include "../libs/libft/includes/not_in_standard_includes/ft_printf_bonus.h"
+# include "../libs/libft/includes/not_in_standard_includes/get_next_line.h"
+# include "../libs/libft/includes/not_in_standard_includes/not_in_standard.h"
+# include "../libs/libft/includes/ft_string_functions.h"
+# include "../libs/libft/includes/ft_stdlib.h"
+# include "../libs/libft/includes/ft_ctype.h"
+// MINILIBX
 # include "../libs/MLX42/include/MLX42/MLX42.h"
+//LIBS
 # include <fcntl.h>
+# include <unistd.h>
 # include <stdlib.h>
 
-/*Macros*/
+//MACROS
 # define WIDTH 800
 # define HEIGHT 600
 # define MINI_WIDTH 200
@@ -28,6 +37,14 @@
 # define WALL_OFFSET 0.3
 # define WEAPON_FRAMES 4
 # define REPEAT_FRAME 4
+# define GREEN "\033[0;32m"
+# define RED "\033[0;31m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define RESET "\033[0m"
+
+# define TRUE 1
+# define FALSE 0
 
 /*Structs*/
 typedef struct s_vector
@@ -98,14 +115,35 @@ typedef struct s_data
 	float			frame_time;
 }	t_data;
 
-// Parser
-
+// PARSER
 void	parse_map(t_data *game);
 int		extract_color(char *color);
-int		extract_floor_ceiling_color(t_data *game);
+void	extract_floor_ceiling_color(t_data *game);
 void	extract_map(t_data *game);
 void	extract_weapon_texture(t_data *game);
 void	extract_wall_texture(t_data *game);
 void	player_initial_setup(t_data *game, int *player);
+
+//CLOSE
+void	close_game(void *param);
+void	handle_error(char *message, t_data *game, int stage);
+void	ft_free_matrix(char **mtx);
+
+//MAP VALIDATION
+void	validate_map(int ac, char **av);
+int		valid_map_count(char *filename);
+int		validate_map_content(char *file);
+short	valid_map_name(char *filename);
+int		validate_map_game(char *file);
+char	**load_file(char *filename);
+int		*load_player(char **file);
+int		hash_element(char *line);
+int		file_rows(char *filename);
+
+//MAP VALIDATION UTILS
+void	replace_char(char *str, char old, char new);
+int		is_empty_line(char *line);
+int		ft_mtxlen(char **mtx);
+void	ft_free_array(char **array);
 
 #endif
