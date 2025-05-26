@@ -49,13 +49,14 @@ static int	*count_file_elements(char *file)
 	int		*array;
 	char	*line;
 
+	if (access(file, F_OK) != 0)
+		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (FALSE);
-	array = ft_calloc(1, sizeof(int));
+		return (NULL);
+	array = ft_calloc(20, sizeof(int));
 	if (!array)
 	{
-		ft_printf("%dError\nMemory allocation failed\n%d", RED, RESET);
 		close(fd);
 		return (FALSE);
 	}
@@ -76,6 +77,11 @@ int	valid_map_count(char *file)
 	int	*array;
 
 	array = count_file_elements(file);
+	if (array == NULL)
+	{
+		ft_printf("%sError\nFailed to open file: %s\n%s", RED, file, RESET);
+		return (FALSE);
+	}
 	if (array[0] == 1 && array[1] == 1 && array[2] == 1 && array[3] == 1
 		&& array[4] == 1 && array[5] == 1 && array[6] >= 3 && array[8] == 0
 		&& array[10] == 0)

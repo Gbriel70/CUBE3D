@@ -75,7 +75,7 @@ char **load_file(char *filename)
     fd = open(filename, O_RDONLY);
     if (fd < 0)
     {
-        ft_printf("%dError\nFailed to open file: %s\n%d", RED, filename, RESET);
+        ft_printf("%sError\nFailed to open file: %s\n%s", RED, filename, RESET);
         return (NULL);
     }
     file = ft_calloc(file_rows(filename) + 1, sizeof(char *));

@@ -19,7 +19,7 @@ VALIDATE_SRC_PATH = ../srcs/validate_map
 VALIDATE_SRC = $(wildcard $(VALIDATE_SRC_PATH)/*.c)
 VALIDATE_OBJS = $(VALIDATE_SRC:.c=.o)
 
-INCLUDES = -I includes -I $(MLX_INCLUDES)
+INCLUDES = -I includes -I . -I $(MLX_INCLUDES)
 
 #==================================COLORS========================================#
 
