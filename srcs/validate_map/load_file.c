@@ -24,45 +24,6 @@ static void load_surf(char **file, char **array)
     }
 }
 
-static char	*ft_substr_insert(char *str, int pos, int clear, char *sub)
-{
-	char	*left;
-	char	*right;
-	char	*result1;
-	char	*result2;
-
-	left = ft_substr(str, 0, pos);
-	right = ft_substr(str, pos + clear, ft_strlen(str) - pos - clear);
-	result1 = ft_strjoin(left, sub);
-	result2 = ft_strjoin(result1, right);
-	free(result1);
-	free (left);
-	free(right);
-	return (result2);
-}
-
-static char	*ft_substr_replace(char *str, char *old, char *new)
-{
-	int		i;
-	char	*new_str;
-	char	*temp;
-
-	new_str = ft_strdup(str);
-	i = 0;
-	while (new_str[i])
-	{
-		if (ft_strnstr(&new_str[i], old, ft_strlen(new_str)) == &new_str[i])
-		{
-			temp = ft_substr_insert(new_str, i, ft_strlen(old), new);
-			free(new_str);
-			new_str = ft_strdup(temp);
-			free(temp);
-		}
-		i++;
-	}
-	return (new_str);
-}
-
 static void load_file_ext(char *line, char **file)
 {
     char *new_line1;
