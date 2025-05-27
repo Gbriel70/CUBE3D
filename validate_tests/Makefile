@@ -27,6 +27,14 @@ PARSER_SRC_PATH = ../srcs/parser
 PARSER_SRC = $(wildcard $(PARSER_SRC_PATH)/*.c)
 PARSER_OBJS = $(PARSER_SRC:.c=.o)
 
+ACTIONS_SRC_PATH = ../srcs/actions
+ACTIONS_SRC = $(wildcard $(ACTIONS_SRC_PATH)/*.c)
+ACTIONS_OBJS = $(ACTIONS_SRC:.c=.o)
+
+START_SRC_PATH = ../srcs/start
+START_SRC = $(wildcard $(START_SRC_PATH)/*.c)
+START_OBJS = $(START_SRC:.c=.o)
+
 INCLUDES = -I includes -I $(MLX_INCLUDES)
 
 #==================================COLORS========================================#
@@ -42,7 +50,7 @@ all: libft mlx $(NAME)
 
 $(NAME): $(OBJS) $(VALIDATE_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(C) $(OBJS) $(VALIDATE_OBJS) $(CLOSE_OBJS) $(PARSER_OBJS) $(CC_FLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	@$(C) $(OBJS) $(VALIDATE_OBJS) $(CLOSE_OBJS) $(PARSER_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(CC_FLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
 
 %.o: %.c

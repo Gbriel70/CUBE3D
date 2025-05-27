@@ -15,14 +15,21 @@ PARSER_SRC_PATH = $(SRC_PATH)/parser
 PARSER_SRC = $(wildcard $(PARSER_SRC_PATH)/*.c)
 PARSER_OBJS = $(PARSER_SRC:.c=.o)
 
-# Adicionando referências para close_game e load_file
-CLOSE_GAME_SRC_PATH = $(SRC_PATH)/close_game
+CLOSE_GAME_SRC_PATH = $(SRC_PATH)/close
 CLOSE_GAME_SRC = $(wildcard $(CLOSE_GAME_SRC_PATH)/*.c)
 CLOSE_GAME_OBJS = $(CLOSE_GAME_SRC:.c=.o)
 
 VALIDATE_SRC_PATH = $(SRC_PATH)/validate_map
 VALIDATE_SRC = $(wildcard $(VALIDATE_SRC_PATH)/*.c)
 VALIDATE_OBJS = $(VALIDATE_SRC:.c=.o)
+
+ACTIONS_SRC_PATH = $(SRC_PATH)/actions
+ACTIONS_SRC = $(wildcard $(ACTIONS_SRC_PATH)/*.c)
+ACTIONS_OBJS = $(ACTIONS_SRC:.c=.o)
+
+START_SRC_PATH = $(SRC_PATH)/start
+START_SRC = $(wildcard $(START_SRC_PATH)/*.c)
+START_OBJS = $(START_SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
 
@@ -64,9 +71,9 @@ libft:
 	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
 
 # Atualizando para incluir os novos objetos
-$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS)
+$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(PARSER_OBJS) $(LOAD_FILE_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
 
 %.o: %.c
@@ -81,7 +88,7 @@ mlx:
 clean:
 	@echo "$(RED)Cleaning up...$(RESET)"
 	@$(MAKE) clean -C libs/libft
-	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS)
+	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS)
 	@rm -f $(MLX_PATH)/build/*.o
 	@echo "$(RED)Cleanup complete!$(RESET)"
 

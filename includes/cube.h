@@ -6,7 +6,7 @@
 /*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:58:18 by gabastos          #+#    #+#             */
-/*   Updated: 2025/05/26 09:20:21 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:55:35 by gabastos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <math.h>
 
 //MACROS
 # define WIDTH 800
@@ -128,6 +129,16 @@ void	player_initial_setup(t_data *game, int *player);
 void	close_game(void *param);
 void	handle_error(char *message, t_data *game, int stage);
 void	ft_free_matrix(char **mtx);
+
+//ACTIONS
+void	move_player(t_data *game, float speed);
+void	move_left(t_data *game, float speed);
+void	move_right(t_data *game, float speed);
+void	rotate_player(t_data *game, float speed);
+void	shoot(t_data *game);
+void	key_press(void *param);
+void	cursor_movement(double mouse_x, double mouse_y, void *param);
+void	mouse_click(void *param);
 
 //MAP VALIDATION
 void	validate_map(int ac, char **av);
