@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:58:18 by gabastos          #+#    #+#             */
-/*   Updated: 2025/05/26 09:20:21 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:37:39 by gcosta-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # include "../libs/libft/includes/ft_string_functions.h"
 # include "../libs/libft/includes/ft_stdlib.h"
 # include "../libs/libft/includes/ft_ctype.h"
+
 // MINILIBX
 # include "../libs/MLX42/include/MLX42/MLX42.h"
+
 //LIBS
 # include <fcntl.h>
 # include <unistd.h>
@@ -123,6 +125,7 @@ void	extract_map(t_data *game);
 void	extract_weapon_texture(t_data *game);
 void	extract_wall_texture(t_data *game);
 void	player_initial_setup(t_data *game, int *player);
+void	extract_content(t_data *game, char **file);
 
 //CLOSE
 void	close_game(void *param);

@@ -1,6 +1,6 @@
 #==================================SETS========================================#
 
-NAME = validate_tests
+NAME = parser_tests
 C = cc
 CC_FLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -ldl -lglfw -pthread -lm
@@ -40,7 +40,7 @@ RESET = \033[0m
 
 all: libft mlx $(NAME)
 
-$(NAME): $(OBJS) $(VALIDATE_OBJS)
+$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_OBJS) $(PARSER_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
 	@$(C) $(OBJS) $(VALIDATE_OBJS) $(CLOSE_OBJS) $(PARSER_OBJS) $(CC_FLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
