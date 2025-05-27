@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "validate_map" ]
+    branches: [ "parsing_file" ]
   pull_request:
-    branches: [ "validate_map" ]
+    branches: [ "parsing_file" ]
 
 jobs:
   build:
@@ -19,8 +19,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y xorg-dev libglfw3-dev
-    - name: Run validation tests
+    - name: Run parser tests
       run: |
-        cd validate_tests
+        cd parsing_tests
         make all
-        ./validate_tests
+        ./parser_tests
