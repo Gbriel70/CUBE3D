@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map_game.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 10:38:50 by gcosta-m          #+#    #+#             */
+/*   Updated: 2025/05/27 10:38:52 by gcosta-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cube.h"
 
-void flood_fill(char **file, int x, int y, int *open_map)
+void	flood_fill(char **file, int x, int y, int *open_map)
 {
-	int m;
-	int n;
+	int	m;
+	int	n;
 
 	m = ft_strlen(file[x]);
 	n = ft_mtxlen(file);
@@ -26,11 +38,11 @@ void flood_fill(char **file, int x, int y, int *open_map)
 		flood_fill(file, x, y - 1, open_map);
 }
 
-int validate_map_game(char *filename)
+int	validate_map_game(char *filename)
 {
-	char **file;
-	int *player;
-	int open_map;
+	char	**file;
+	int		*player;
+	int		open_map;
 
 	file = load_file(filename);
 	player = load_player(file);

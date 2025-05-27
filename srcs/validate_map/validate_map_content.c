@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map_content.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 10:38:42 by gcosta-m          #+#    #+#             */
+/*   Updated: 2025/05/27 10:38:43 by gcosta-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cube.h"
 
-static int validate_map_content2(char *line)
+static int	validate_map_content2(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
 	{
 		if (ft_strchr("01NSEW ", line[i]))
-				return (FALSE);
+			return (FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-static int validate_color(char *line)
+static int	validate_color(char *line)
 {
-	char **mtx_color;
-	int i;
+	char	**mtx_color;
+	int		i;
 
 	if (!line)
 		return (FALSE);
@@ -29,8 +41,8 @@ static int validate_color(char *line)
 		i = 0;
 		while (mtx_color[i])
 		{
-			if (!ft_isdigit(mtx_color[i][0]) || 
-			(ft_atoi(mtx_color[i]) < 0 || ft_atoi(mtx_color[i]) > 255))
+			if (!ft_isdigit(mtx_color[i][0]) || (ft_atoi(mtx_color[i]) < 0
+					|| ft_atoi(mtx_color[i]) > 255))
 			{
 				ft_free_array(mtx_color);
 				return (FALSE);
@@ -42,18 +54,19 @@ static int validate_color(char *line)
 	return (TRUE);
 }
 
-static int validate_texture(char *line)
+static int	validate_texture(char *line)
 {
-	int check;
-	size_t file_len;
-	size_t exit_len;
-	mlx_texture_t *texture;
+	int				check;
+	size_t			file_len;
+	size_t			exit_len;
+	mlx_texture_t	*texture;
 
 	check = 1;
 	file_len = ft_strlen(line);
 	exit_len = ft_strlen(".png");
 	texture = mlx_load_png(line);
-	if (file_len <= exit_len || ft_strncmp(&line[file_len - 4], ".png", exit_len) != 0)
+	if (file_len <= exit_len || ft_strncmp(&line[file_len - 4], ".png",
+			exit_len) != 0)
 	{
 		ft_printf("%dError\nTexture name must end with .png\n%d", RED, RESET);
 		check = 0;
@@ -63,9 +76,9 @@ static int validate_texture(char *line)
 	return (check);
 }
 
-static void validate_map_content_exit(char **file, int *array)
+static void	validate_map_content_exit(char **file, int *array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (file[i])
@@ -80,10 +93,10 @@ static void validate_map_content_exit(char **file, int *array)
 	}
 }
 
-int validate_map_content(char *file)
+int	validate_map_content(char *file)
 {
-	char **tmp_file;
-	int *array;
+	char	**tmp_file;
+	int		*array;
 
 	tmp_file = load_file(file);
 	if (!tmp_file)

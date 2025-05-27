@@ -1,37 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 10:38:31 by gcosta-m          #+#    #+#             */
+/*   Updated: 2025/05/27 10:38:32 by gcosta-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cube.h"
 
-static void update_player(int *player, int i, int j, char **file)
+static void	update_player(int *player, int i, int j, char **file)
 {
-    player[0]++;
-    player[1] = i;
-    player[2] = j;
-    player[3] = file[i][j];
-    file[i][j] = '0';
+	player[0]++;
+	player[1] = i;
+	player[2] = j;
+	player[3] = file[i][j];
+	file[i][j] = '0';
 }
 
-static int is_player(char c)
+static int	is_player(char c)
 {
-    return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int *load_player(char **file)
+int	*load_player(char **file)
 {
-    int *player;
-    int i;
-    int j;
+	int	*player;
+	int	i;
+	int	j;
 
-    player = ft_calloc(20, sizeof(int));
-    i = 6;
-    while (file[i])
-    {
-        j = 0;
-        while (file[i][j])
-        {
-            if (is_player(file[i][j]))
-                update_player(player, i, j, file);
-            j++;
-        }
-        i++;
-    }
-    return (player);
+	player = ft_calloc(20, sizeof(int));
+	i = 6;
+	while (file[i])
+	{
+		j = 0;
+		while (file[i][j])
+		{
+			if (is_player(file[i][j]))
+				update_player(player, i, j, file);
+			j++;
+		}
+		i++;
+	}
+	return (player);
 }
