@@ -69,7 +69,7 @@ mlx:
 
 clean:
 	@echo "$(RED)Cleaning $(NAME) objects...$(RESET)"
-	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_OBJS) $(PARSER_OBJS)
+	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_OBJS) $(PARSER_OBJS) $(ACTIONS_OBJS) $(START_OBJS)
 	@$(MAKE) clean -C ../libs/libft
 	@$(MAKE) clean -C $(MLX_PATH)/build
 	@echo "$(RED)Cleaning of $(NAME) objects complete!$(RESET)"

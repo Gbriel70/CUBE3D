@@ -8,7 +8,7 @@ void	extract_map(t_data *game)
 	game->map.layout = &game->map.content[6];
 	rows = 0;
 	columns = 0;
-	while (game->map.content[rows])
+	while (game->map.layout[rows])
 	{
 		if (ft_strlen(game->map.layout[rows]) > columns)
 			columns = ft_strlen(game->map.layout[rows]);
