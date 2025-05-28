@@ -41,7 +41,6 @@ void	parse_map(t_data *game)
 		exit(EXIT_FAILURE);
 	}
 	extract_content(game, file);
-
 	player_initial_setup(game, player);
 	extract_map(game);
 	extract_floor_ceiling_color(game);
