@@ -31,6 +31,10 @@ START_SRC_PATH = $(SRC_PATH)/start
 START_SRC = $(wildcard $(START_SRC_PATH)/*.c)
 START_OBJS = $(START_SRC:.c=.o)
 
+DRAW_SRC_PATH = $(SRC_PATH)/draw
+DRAW_SRC = $(wildcard $(DRAW_SRC_PATH)/*.c)
+DRAW_OBJS = $(DRAW_SRC:.c=.o)
+
 LIBFT = libs/libft/libft.a
 
 MLX_PATH = libs/MLX42
@@ -49,7 +53,7 @@ RESET = \033[0m
 
 #=================================VALGRIND====================================#
 
-leak: all
+leak: $(NAME)
 	@echo "$(GREEN)Running Valgrind...$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 	@echo "$(GREEN)Valgrind complete!$(RESET)"
@@ -70,10 +74,9 @@ libft:
 	@$(MAKE) -C libs/libft
 	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
 
-# Atualizando para incluir os novos objetos
-$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS)
+$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(PARSER_OBJS) $(LOAD_FILE_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(PARSER_OBJS) $(LOAD_FILE_OBJS) $(DRAW_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
 
 %.o: %.c
@@ -88,7 +91,7 @@ mlx:
 clean:
 	@echo "$(RED)Cleaning up...$(RESET)"
 	@$(MAKE) clean -C libs/libft
-	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS)
+	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
 	@rm -f $(MLX_PATH)/build/*.o
 	@echo "$(RED)Cleanup complete!$(RESET)"
 

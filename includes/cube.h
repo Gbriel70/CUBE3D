@@ -116,6 +116,16 @@ typedef struct s_data
 	float			frame_time;
 }	t_data;
 
+//DRAW
+void	draw_player_view(void *param);
+void	raycast_walls(t_data *game);
+void	render_wall_tex_to_screen(t_data *game, t_dda *ray);
+void	draw_minimap(void *param);
+
+// START
+void	start_game(t_data *game);
+void	create_mlx_images(t_data *game);
+
 // PARSER
 void	parse_map(t_data *game);
 int		extract_color(char *color);

@@ -1,6 +1,6 @@
 #==================================SETS========================================#
 
-NAME = validate_tests
+NAME = draw_tests
 C = cc
 CC_FLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -ldl -lglfw -pthread -lm

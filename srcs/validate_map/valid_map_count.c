@@ -52,10 +52,10 @@ static int	*count_file_elements(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (FALSE);
-	array = ft_calloc(1, sizeof(int));
+	array = ft_calloc(20, sizeof(int));
 	if (!array)
 	{
-		ft_printf("%dError\nMemory allocation failed\n%d", RED, RESET);
+		ft_printf("%sError\nMemory allocation failed\n%s", RED, RESET);
 		close(fd);
 		return (FALSE);
 	}
