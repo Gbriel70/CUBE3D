@@ -32,31 +32,13 @@ void	move_player(t_data *game, float speed)
 	new_pos.x = game->player.x + velocity.x + wall;
 	wall = get_signal(velocity.y) * WALL_OFFSET;
 	new_pos.y = game->player.y + velocity.y + wall;
-	if (game->map.layout[(int)game->player.y][(int)new_pos.x] == '0')
-		game->player.x = new_pos.x;
-	if (game->map.layout[(int)new_pos.y][(int)game->player.x] == '0')
-		game->player.y = new_pos.y;
+	if (game->map.layout[(int)game->player.y][new_pos.x] == '0')
+		game->player.x += velocity.x;
+	if (game->map.layout[new_pos.y][(int)game->player.x] == '0')
+		game->player.y += velocity.y;
 }
 
 void	move_left(t_data *game, float speed)
-{
-	t_vector	velocity;
-	t_coord		new_pos;
-	float		wall;
-
-	velocity.x = -game->dir.y * speed * game->frame_time;
-	velocity.y = game->dir.x * speed * game->frame_time;
-	wall = get_signal(velocity.x) * WALL_OFFSET;
-	new_pos.x = game->player.x + velocity.x + wall;
-	wall = get_signal(velocity.y) * WALL_OFFSET;
-	new_pos.y = game->player.y + velocity.y + wall;
-	if (game->map.layout[(int)game->player.y][(int)new_pos.x] == '0')
-		game->player.x = new_pos.x;
-	if (game->map.layout[(int)new_pos.y][(int)game->player.x] == '0')
-		game->player.y = new_pos.y;
-}
-
-void	move_right(t_data *game, float speed)
 {
 	t_vector	velocity;
 	t_coord		new_pos;
@@ -68,10 +50,28 @@ void	move_right(t_data *game, float speed)
 	new_pos.x = game->player.x + velocity.x + wall;
 	wall = get_signal(velocity.y) * WALL_OFFSET;
 	new_pos.y = game->player.y + velocity.y + wall;
-	if (game->map.layout[(int)game->player.y][(int)new_pos.x] == '0')
-		game->player.x = new_pos.x;
-	if (game->map.layout[(int)new_pos.y][(int)game->player.x] == '0')
-		game->player.y = new_pos.y;
+	if (game->map.layout[(int)game->player.y][new_pos.x] == '0')
+		game->player.x += velocity.x;
+	if (game->map.layout[new_pos.y][(int)game->player.x] == '0')
+		game->player.y += velocity.y;
+}
+
+void	move_right(t_data *game, float speed)
+{
+	t_vector	velocity;
+	t_coord		new_pos;
+	float		wall;
+
+	velocity.x = -game->dir.y * speed * game->frame_time;
+	velocity.y = game->dir.x * speed * game->frame_time;
+	wall = get_signal(velocity.x) * WALL_OFFSET;
+	new_pos.x = game->player.x + velocity.x + wall;
+	wall = get_signal(velocity.y) * WALL_OFFSET;
+	new_pos.y = game->player.y + velocity.y + wall;
+	if (game->map.layout[(int)game->player.y][new_pos.x] == '0')
+		game->player.x += velocity.x;
+	if (game->map.layout[new_pos.y][(int)game->player.x] == '0')
+		game->player.y += velocity.y;
 }
 
 void	rotate_player(t_data *game, float speed)

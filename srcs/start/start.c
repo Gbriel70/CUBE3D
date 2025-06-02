@@ -14,6 +14,7 @@
 
 void	start_game(t_data *game)
 {
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	if (!game->mlx)
 		handle_error("Failed to initialize MLX42", game, 1);

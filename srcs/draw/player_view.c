@@ -42,11 +42,34 @@ static void update_fps(t_data *game)
     }
 }
 
+static void limit_fps(t_data *game __attribute__((unused)))
+{
+    static double last_time = 0;
+    static double target_fps = 100.0;
+    double target_frame_time = 1.0 / target_fps;
+    double current_time;
+    
+    if (last_time == 0) 
+    {
+        last_time = mlx_get_time();
+        return;
+    }
+    while (1) 
+    {
+        current_time = mlx_get_time();
+        if (current_time - last_time >= target_frame_time)
+            break;
+    }
+    last_time = current_time;
+}
+
 void draw_player_view(void *param)
 {
     t_data *game;
 
     game = param;
+
+    limit_fps(game); // Limita o FPS antes de desenhar
     draw_background(game);
     update_fps(game);
     raycast_walls(game);
