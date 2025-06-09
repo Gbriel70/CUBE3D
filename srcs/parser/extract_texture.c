@@ -4,10 +4,10 @@ void	extract_weapon_texture(t_data *game)
 {
 	int	i;
 
-	game->wand_tex[0] = mlx_load_png("./textures/weapon/wand_0.png");
-	game->wand_tex[1] = mlx_load_png("./textures/weapon/wand_1.png");
-	game->wand_tex[2] = mlx_load_png("./textures/weapon/wand_2.png");
-	game->wand_tex[3] = mlx_load_png("./textures/weapon/wand_3.png");
+	game->wand_tex[0] = mlx_load_png("./textures/weapon/00_frame.png");
+	game->wand_tex[1] = mlx_load_png("./textures/weapon/01_frame.png");
+	game->wand_tex[2] = mlx_load_png("./textures/weapon/02_frame.png");
+	game->wand_tex[3] = mlx_load_png("./textures/weapon/03_frame.png");
 	i = 0;
 	while (i < WEAPON_FRAMES)
 	{

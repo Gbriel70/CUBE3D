@@ -29,9 +29,9 @@ void	key_press(void *param)
 		move_left(game, SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_right(game, SPEED);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_L))
 		rotate_player(game, ROTATE_SPEED);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_J))
 		rotate_player(game, -ROTATE_SPEED);
 }
 
@@ -41,29 +41,16 @@ void cursor_movement(double xpos, double ypos, void *param)
     t_data *game = (t_data *)param;
     static double last_x = -1;
     
-    // Na primeira chamada, apenas inicializa a posição
     if (last_x == -1) {
         last_x = xpos;
         return;
-    }
-    
-    // Calcula o movimento horizontal do mouse
+    }    
     double mouse_dx = xpos - last_x;
-    last_x = xpos;
-    
-    // Fator de sensibilidade - ajuste conforme necessário
-    float sensitivity = 1.0;
-    
-    // Rotaciona com base no movimento do mouse
-    float rotation_speed = -mouse_dx * sensitivity;
-    
-    // Usa sua função de rotação já existente
-    rotate_player(game, rotation_speed);
-    
-    // Centraliza o mouse novamente para movimento contínuo (opcional)
-    // mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
-    
-    // Ignora o parâmetro ypos (não usado para olhar para cima/baixo em raycasters 2.5D)
+    last_x = xpos;    
+    float sensitivity = 0.3;    
+    float rotation_speed = -mouse_dx * sensitivity;    
+    rotate_player(game, rotation_speed);    
+    mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);    
     (void)ypos;
 }
 
@@ -72,6 +59,7 @@ void	mouse_click(void *param)
 	t_data	*game;
 
 	game = param;
-	if (game->shoot || mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
+	if (game->shoot || mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT) 
+	|| mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
 		shoot(game);
 }
