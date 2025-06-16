@@ -4,6 +4,7 @@ NAME = CUBE3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -ldl -lglfw -pthread -lm
+HEADERS = $(wildcard includes/*.h)
 
 #=================================FILES====================================#
 
@@ -51,6 +52,45 @@ YELLOW = \033[0;33m
 MAGENTA = \033[0;35m
 RESET = \033[0m
 
+#=================================RULES====================================#
+
+all: libft mlx $(NAME)
+
+libft:
+	@echo "$(YELLOW)Compiling libft...$(RESET)"
+	@$(MAKE) -C libs/libft
+	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
+
+$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
+	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
+	@$(CC) $(OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(PARSER_OBJS) $(LOAD_FILE_OBJS) $(DRAW_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+mlx:
+	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
+	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
+	@make -C $(MLX_PATH)/build -j4 > /dev/null 2>&1
+	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
+
+clean:
+	@echo "$(RED)Cleaning up...$(RESET)"
+	@$(MAKE) clean -C libs/libft
+	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
+	@rm -f $(MLX_PATH)/build/*.o
+	@echo "$(RED)Cleanup complete!$(RESET)"
+
+fclean: clean
+	@echo "$(MAGENTA)Cleaning up...$(RESET)"
+	@$(MAKE) fclean -C libs/libft
+	@rm -f $(MLX_PATH)/build/*.a
+	@rm -f $(NAME)
+	@echo "$(MAGENTA)Cleanup complete!$(RESET)"
+
+re: fclean all
+
 #=================================VALGRIND====================================#
 
 leak: $(NAME)
@@ -64,45 +104,6 @@ push:
 	@echo "$(YELLOW)Pushing to libft...$(RESET)"
 	@git submodule update --init --recursive
 	@echo "$(YELLOW)Push to libft complete!$(RESET)"
-
-#=================================RULES====================================#
-
-all: libft mlx $(NAME)
-
-libft:
-	@echo "$(YELLOW)Compiling libft...$(RESET)"
-	@$(MAKE) -C libs/libft
-	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
-
-$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
-	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(PARSER_OBJS) $(LOAD_FILE_OBJS) $(DRAW_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-mlx:
-	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
-	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
-	@make -C $(MLX_PATH)/build -j4 > /dev/null 2>&1
-	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
-
-clean:
-	@echo "$(RED)Cleaning up...$(RESET)"
-	@$(MAKE) clean -C libs/libft
-	@rm -f $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(LOAD_FILE_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
-	@rm -f $(MLX_PATH)/build/*.o
-	@echo "$(RED)Cleanup complete!$(RESET)"
-
-fclean: clean
-	@echo "$(MAGENTA)Cleaning up...$(RESET)"
-	@$(MAKE) fclean -C libs/libft
-	@rm -f $(MLX_PATH)/build/*.a
-	@rm -f $(NAME)
-	@echo "$(MAGENTA)Cleanup complete!$(RESET)"
-
-re: fclean all
 
 #=================================PHONY===================================#
 
