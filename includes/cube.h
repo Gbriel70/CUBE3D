@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:58:18 by gabastos          #+#    #+#             */
-/*   Updated: 2025/05/27 14:55:35 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/06/16 10:26:54 by gcosta-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <math.h>
 
 //MACROS
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1200
+# define HEIGHT 900
 # define MINI_WIDTH 200
 # define MINI_HEIGHT 200
 # define SPEED 3.0
