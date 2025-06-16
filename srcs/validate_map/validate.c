@@ -1,21 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 15:05:00 by gabastos          #+#    #+#             */
+/*   Updated: 2025/06/16 15:05:01 by gabastos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cube.h"
 
-short valid_map_name(char *filename)
+short	valid_map_name(char *filename)
 {
-	int len;
-	int exit_len;
-	
+	int	len;
+	int	exit_len;
+
 	len = ft_strlen(filename);
 	exit_len = ft_strlen(".cub");
-	if (len <= exit_len || ft_strncmp(&filename[len - 4], ".cub", exit_len) != 0)
+	if (len <= exit_len || ft_strncmp(&filename[len - 4], ".cub",
+			exit_len) != 0)
 	{
-		ft_printf("%sError\nInvalid map name. Map name must end with .cub\n%s", RED, RESET);
+		ft_printf("%sError\nInvalid map name. Map name must end with .cub\n%s",
+			RED, RESET);
 		return (FALSE);
 	}
 	return (TRUE);
 }
 
-void validate_map(int ac, char **av)
+void	validate_map(int ac, char **av)
 {
 	if (ac != 2)
 	{

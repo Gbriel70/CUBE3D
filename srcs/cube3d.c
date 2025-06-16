@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 15:05:05 by gabastos          #+#    #+#             */
+/*   Updated: 2025/06/16 15:05:33 by gabastos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cube.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *game;
+	t_data	*game;
 
 	validate_map(ac, av);
 	game = ft_calloc(1, sizeof(t_data));
