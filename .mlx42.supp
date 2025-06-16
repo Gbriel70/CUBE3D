@@ -1,0 +1,94 @@
+{
+   <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_catch_exception
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_init
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:XrmGetStringDatabase
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_XrmInitParseInfo
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:__tls_get_addr
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:__pthread_once_slow
+   ...
+}
+{
+ <MLX_PNG_LOAD>
+   Memcheck:Leak
+   match-leak-kinds: all
+   fun:malloc
+   ...
+   fun:mlx_load_png
+   ...
+   fun:extract_weapon_texture
+   ...
+   fun:parse_map
+   ...
+   fun:main
+}
+{
+ <DL_LOAD_INVALID_READ>
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+   ...
+   fun:_dl_map_object
+   ...
+}
+{
+ <DL_LOAD_INVALID_READ2>
+   Memcheck:Addr8
+   fun:strncmp
+   ...
+   fun:decompose_rpath
+   ...
+   fun:_dl_map_object
+   ...
+}
+{
+ <DL_OPEN_LEAK>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:_dl_find_object_update
+   ...
+   fun:dl_open_worker_begin
+   ...
+   fun:dlopen@@GLIBC_2.34
+   ...
+}
