@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:31:13 by gabastos          #+#    #+#             */
-/*   Updated: 2025/06/16 10:24:15 by gcosta-m         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:58:47 by gabastos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void	key_press(void *param)
 		move_left(game, SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_right(game, SPEED);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_L))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_L) || mlx_is_key_down(game->mlx,
+			MLX_KEY_RIGHT))
 		rotate_player(game, ROTATE_SPEED);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_J))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_J) || mlx_is_key_down(game->mlx,
+			MLX_KEY_LEFT))
 		rotate_player(game, -ROTATE_SPEED);
 }
 

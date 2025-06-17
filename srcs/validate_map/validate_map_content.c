@@ -6,7 +6,7 @@
 /*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:04:15 by gabastos          #+#    #+#             */
-/*   Updated: 2025/06/16 15:04:20 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/06/17 11:22:43 by gabastos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,16 @@ static int	validate_texture(char *line)
 	size_t			file_len;
 	size_t			exit_len;
 	mlx_texture_t	*texture;
+	int				fd;
 
 	check = 1;
 	file_len = ft_strlen(line);
 	exit_len = ft_strlen(".png");
 	texture = mlx_load_png(line);
+	fd = open(line, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
 	if (file_len <= exit_len || ft_strncmp(&line[file_len - 4], ".png",
 			exit_len) != 0)
 	{

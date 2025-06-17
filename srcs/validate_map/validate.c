@@ -6,7 +6,7 @@
 /*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:05:00 by gabastos          #+#    #+#             */
-/*   Updated: 2025/06/16 15:05:01 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/06/17 11:26:34 by gabastos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,27 @@ void	validate_map(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		ft_printf("%dError\nUsage: ./cub3D <map.cub>\n%d", RED, RESET);
+		ft_printf("%sError\nUsage: ./cub3D <map.cub>\n%s", RED, RESET);
 		exit(1);
 	}
 	if (valid_map_name(av[1]) == FALSE)
+	{
+		ft_printf("%sError\n%s", RED, RESET);
 		exit(1);
+	}
 	if (valid_map_count(av[1]) == FALSE)
+	{
+		ft_printf("%sError\n%s", RED, RESET);
 		exit(1);
+	}
 	if (validate_map_content(av[1]) == FALSE)
+	{
+		ft_printf("%sError\n%s", RED, RESET);
 		exit(1);
+	}
 	if (validate_map_game(av[1]) == FALSE)
+	{
+		ft_printf("%sError\n%s", RED, RESET);
 		exit(1);
+	}
 }
