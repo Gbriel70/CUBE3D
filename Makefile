@@ -54,26 +54,26 @@ RESET = \033[0m
 
 #=================================RULES====================================#
 
-all: libft mlx $(NAME)
+all: $(NAME)
 
-libft:
+$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS) $(LIBFT) $(MLX)
+	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
+	@$(CC) $(filter %.o, $^) $(CFLAGS) $(filter %.a, $^) $(MLX_FLAGS) -o $@
+	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
+
+$(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(RESET)"
 	@$(MAKE) -C libs/libft
 	@echo "$(YELLOW)Compilation of libft complete!$(RESET)"
 
-$(NAME): $(OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(PARSER_OBJS) $(DRAW_OBJS)
-	@echo "$(GREEN)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(OBJS) $(ACTIONS_OBJS) $(START_OBJS) $(VALIDATE_OBJS) $(CLOSE_GAME_OBJS) $(PARSER_OBJS) $(LOAD_FILE_OBJS) $(DRAW_OBJS) $(CFLAGS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)Compilation of $(NAME) complete!$(RESET)"
-
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-mlx:
+$(MLX):
 	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
 	@cmake $(MLX_PATH) -B $(MLX_PATH)/build > /dev/null 2>&1
 	@make -C $(MLX_PATH)/build -j4 > /dev/null 2>&1
 	@echo "$(YELLOW)Compilation of MLX42 complete!$(RESET)"
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@echo "$(RED)Cleaning up...$(RESET)"
@@ -107,4 +107,4 @@ push:
 
 #=================================PHONY===================================#
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re
