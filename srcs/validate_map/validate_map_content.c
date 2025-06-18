@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_content.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabastos <gabastos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:04:15 by gabastos          #+#    #+#             */
-/*   Updated: 2025/06/17 11:22:43 by gabastos         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:19:49 by gcosta-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int	validate_map_content2(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (ft_strchr("01NSEW ", line[i]))
-			return (FALSE);
+		if (!ft_strchr("01NSEW ", line[i]))
+			return (TRUE);
 		i++;
 	}
-	return (TRUE);
+	return (FALSE);
 }
 
 static int	validate_color(char *line)

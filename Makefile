@@ -1,6 +1,6 @@
 #=================================SETS====================================#
 
-NAME = CUBE3D
+NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -ldl -lglfw -pthread -lm
